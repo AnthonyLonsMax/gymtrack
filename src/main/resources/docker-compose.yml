@@ -1,0 +1,11 @@
+services:
+    db:
+        image: postgres:alpine
+        restart: unless-stopped
+        ports:
+            - 5433:5432
+        container_name: acopios_database
+        environment:
+            - POSTGRES_PASSWORD=localenv
+            - POSTGRES_USER=localenv
+            - POSTGRES_DB=localenv

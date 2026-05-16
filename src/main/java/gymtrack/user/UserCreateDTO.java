@@ -11,5 +11,7 @@ public record UserCreateDTO(
 
 		@Nonnull @Size(min = 2, max = 68) String picture,
 
-		@Nonnull @Size(min = 7, max = 128) String password) {
+		@Nonnull @Size(min = 7, max = 128) String password
+
+) {
 }

@@ -26,9 +26,6 @@ public class AuthController {
 	private UserRepository userRepository;
 
 	@Autowired
-	private UserMapper userMapper;
-
-	@Autowired
 	private PasswordEncoder passwordEncoder;
 
 	@Autowired
@@ -38,7 +35,8 @@ public class AuthController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public AuthResponse register(@Valid @RequestBody RegisterRequest req) {
 		if (userRepository.existsByUserName(req.userName())) {
-			throw APIException.of(ErrorCodes.ALREADY_FOUND, "username already taken");
+			throw APIException.of(ErrorCodes.ALREADY_FOUND,
+					"username already taken");
 		}
 
 		var entity = new UserEntity();
@@ -53,10 +51,12 @@ public class AuthController {
 	@PostMapping("/login")
 	public AuthResponse login(@Valid @RequestBody LoginRequest req) {
 		var entity = userRepository.findByUserName(req.userName())
-			.orElseThrow(() -> APIException.of(ErrorCodes.UNAUTHENTICATED, "invalid credentials"));
+				.orElseThrow(() -> APIException.of(ErrorCodes.UNAUTHENTICATED,
+						"invalid credentials"));
 
 		if (!passwordEncoder.matches(req.password(), entity.getPassword())) {
-			throw APIException.of(ErrorCodes.UNAUTHENTICATED, "invalid credentials");
+			throw APIException.of(ErrorCodes.UNAUTHENTICATED,
+					"invalid credentials");
 		}
 
 		return buildAuthResponse(entity);
@@ -66,11 +66,13 @@ public class AuthController {
 	public AuthResponse refresh(@Valid @RequestBody RefreshRequest req) {
 		var userName = jwtService.extractUserName(req.refreshToken());
 		if (userName == null || !jwtService.isTokenValid(req.refreshToken())) {
-			throw APIException.of(ErrorCodes.UNAUTHENTICATED, "invalid refresh token");
+			throw APIException.of(ErrorCodes.UNAUTHENTICATED,
+					"invalid refresh token");
 		}
 
 		var entity = userRepository.findByUserName(userName)
-			.orElseThrow(() -> APIException.of(ErrorCodes.UNAUTHENTICATED, "user not found"));
+				.orElseThrow(() -> APIException.of(ErrorCodes.UNAUTHENTICATED,
+						"user not found"));
 
 		return buildAuthResponse(entity);
 	}
@@ -78,11 +80,8 @@ public class AuthController {
 	private AuthResponse buildAuthResponse(UserEntity entity) {
 		var accessToken = jwtService.generateAccessToken(entity);
 		var refreshToken = jwtService.generateRefreshToken(entity);
-		return new AuthResponse(
-			accessToken,
-			refreshToken,
-			entity.getId().toString(),
-			entity.getUserName(),
-			entity.getPicture());
+		return new AuthResponse(accessToken, refreshToken,
+				entity.getId().toString(), entity.getUserName(),
+				entity.getPicture());
 	}
 }

@@ -13,6 +13,8 @@ public record UserGetDTO(UUID id,
 
 		LocalDateTime created,
 
-		LocalDateTime upated) {
+		LocalDateTime upated
+
+) {
 
 }

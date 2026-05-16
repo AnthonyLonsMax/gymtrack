@@ -1,6 +1,7 @@
 spring:
   application:
     name: acopios
+  jooq.sql-dialect: Postgres
   datasource:
     url: jdbc:postgresql://localhost:5433/localenv
     username: localenv

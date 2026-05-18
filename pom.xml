@@ -217,7 +217,6 @@
 			<plugin>
 				<groupId>org.jooq</groupId>
 				<artifactId>jooq-codegen-maven</artifactId>
-				<version>${jooq.version}</version>
 				<configuration>
 					<jdbc>
 						<driver>org.postgresql.Driver</driver>

@@ -1,4 +1,4 @@
-package gymtrack.config;
+package gymtrack.filters;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import gymtrack.security.JwtService;
 import gymtrack.user.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

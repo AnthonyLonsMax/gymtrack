@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gymtrack.APIException;
 import gymtrack.ErrorCodes;
-import gymtrack.config.JwtService;
+import gymtrack.security.JwtService;
 import gymtrack.user.UserCreateDTO;
 import gymtrack.user.UserEntity;
 import gymtrack.user.UserMapper;

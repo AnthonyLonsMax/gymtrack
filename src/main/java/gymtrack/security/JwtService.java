@@ -1,8 +1,6 @@
-package gymtrack.config;
+package gymtrack.security;
 
-import java.security.Key;
 import java.util.Date;
-import java.util.UUID;
 
 import javax.crypto.SecretKey;
 
